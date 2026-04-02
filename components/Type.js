@@ -24,10 +24,14 @@ export default {
                 @keyup.enter.prevent.stop="$emit('submit', val)"
                 @blur="handleBlur"
                 type="text" 
+                inputmode="text"
+                autocorrect="off" 
+                autocapitalize="none" 
+                spellcheck="false"
+                autocomplete="off"
                 placeholder="პასუხი..." 
                 class="w-full p-4 border-b-4 border-blue-500 bg-slate-50 rounded-t-2xl text-center text-2xl font-bold focus:outline-none">
             
-            <!-- Updated text to be more inclusive of mobile -->
             <p class="text-center text-[10px] text-slate-400 mt-4 uppercase font-black tracking-widest">
                 Press Enter or tap away to check
             </p>
