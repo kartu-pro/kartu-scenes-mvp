@@ -1,0 +1,18 @@
+[v-cloak] > * {
+  display: none !important;
+}
+[v-cloak]::before {
+	content: "Loading...";
+	display: block;
+	text-align: center;
+	margin-top: 50px;
+	font-family: sans-serif;
+}
+.diff-char { font-size: 1.6rem; font-weight: 700; }
+.diff-match { color: #1e293b; }
+.diff-deletion { color: #ef4444; text-decoration: line-through; opacity: 0.5; padding: 0 1px; }
+.diff-insertion { color: #10b981; background: #ecfdf5; border-bottom: 3px solid #10b981; padding: 0 2px; border-radius: 2px; }
+
+/* Custom Scrollbar for the Feedback area */
+.overflow-y-auto::-webkit-scrollbar { width: 4px; }
+.overflow-y-auto::-webkit-scrollbar-thumb { background: #e2e8f0; border-radius: 10px; }

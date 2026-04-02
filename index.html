@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ka">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>Georgian Quiz</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="bg-slate-100 flex justify-center items-center h-screen overflow-hidden text-slate-900">
+    <div id="app" v-cloak class="w-full max-w-md h-screen bg-white flex flex-col relative overflow-hidden">
+
+        <!-- NAV COMPONENT (Isolated) -->
+        <quiz-nav :current="currentIndex + 1" :total="questions.length" :can-prev="currentIndex > 0"
+            :can-next="currentIndex < questions.length - 1" @prev="prev" @next="next">
+        </quiz-nav>
+
+        <main class="flex-1 flex flex-col p-4 overflow-hidden">
+
+            <!-- IMAGE COMPONENT -->
+            <div class="w-full flex justify-center mb-4 shrink-0">
+                <img :src="current.image" 
+                     :alt="'Illustration for question ' + current.id"
+                     class="h-40 w-auto object-contain rounded-lg shadow-sm border border-slate-100">
+            </div>
+
+            <!-- SENTENCE STAGE -->
+            <div class="text-center mb-6 shrink-0">
+                <p class="text-2xl font-bold leading-snug">
+                    {{current.clozeText.split('___')[0]}}
+                    <span class="text-blue-600 border-b-4 border-blue-100 px-1">{{isChecking ? current.answer :
+                        '___'}}</span>
+                    {{current.clozeText.split('___')[1]}}
+                </p>
+                <div class="min-h-[1.5rem] mt-2">
+                    <button v-if="!showHint" @click="showHint = true"
+                        class="text-slate-300 text-[10px] uppercase font-black tracking-widest">Show
+                        Translation</button>
+                    <p v-else class="text-slate-400 italic text-sm">{{current.english}}</p>
+                </div>
+            </div>
+
+            <!-- INTERACTION / FEEDBACK SWAP -->
+            <div class="flex-1 flex flex-col justify-center items-center overflow-hidden">
+                <div v-if="!isChecking" class="w-full">
+                    <component :is="current.type + '-interaction'" :key="currentIndex" v-bind="current" @submit="handleSubmission">
+                    </component>
+                </div>
+
+                <quiz-feedback v-else :feedback="feedback" :answer="current.answer" @continue="next">
+                </quiz-feedback>
+            </div>
+        </main>
+    </div>
+
+    <!-- DATA SOURCE -->
+    <script src="data.js"></script>
+    <!-- APP MODULE -->
+    <script type="module" src="app.js"></script>
+</body>
+
+</html>
