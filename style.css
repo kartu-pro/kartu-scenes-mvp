@@ -16,3 +16,12 @@
 /* Custom Scrollbar for the Feedback area */
 .overflow-y-auto::-webkit-scrollbar { width: 4px; }
 .overflow-y-auto::-webkit-scrollbar-thumb { background: #e2e8f0; border-radius: 10px; }
+
+/* When the screen is wider than 768px... */
+@media (min-width: 768px) {
+  /* Find the image container and force it to display, 
+     overriding Vue's "display: none" from the v-if */
+  .image-container {
+    display: flex !important;
+  }
+}
