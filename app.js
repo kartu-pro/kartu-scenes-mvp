@@ -21,7 +21,8 @@ createApp({
             currentIndex: 0,
             showHint: false,
             feedback: null,
-            isChecking: false
+            isChecking: false,
+            isTyping: false
         }
     },
     computed: {

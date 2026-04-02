@@ -8,21 +8,14 @@ export default {
             }
         }, 200);
     },
-    methods: {
-        handleBlur() {
-            // Trigger check on blur only if user has actually typed something
-            if (this.val.trim().length > 0) {
-                this.$emit('submit', this.val);
-            }
-        }
-    },
     template: `
         <div class="w-full px-2 animate-in fade-in zoom-in duration-200">
             <input 
                 ref="answerInput"
                 v-model="val" 
+                @focus="$emit('focus')"
+                @blur="$emit('blur')"
                 @keyup.enter.prevent.stop="$emit('submit', val)"
-                @blur="handleBlur"
                 type="text" 
                 inputmode="text"
                 autocorrect="off" 
